@@ -4,6 +4,7 @@ import Properties from './pages/Properties'
 import PropertyDetails from './pages/PropertyDetails'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Compare from './pages/Compare'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/property/:id" element={<PropertyDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/compare" element={<Compare />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

@@ -4,6 +4,8 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import ImageSlider from '../components/ImageSlider';
 import ContactModal from '../components/ContactModal';
+import MortgageCalculator from '../components/MortgageCalculator';
+import ShareProperty from '../components/ShareProperty';
 import { useFavorites } from '../hooks/useFavorites';
 import { properties } from '../data/properties';
 
@@ -112,6 +114,9 @@ const PropertyDetails = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Mortgage Calculator */}
+              <MortgageCalculator propertyPrice={property.price} />
             </div>
 
             {/* Sidebar */}
@@ -137,9 +142,14 @@ const PropertyDetails = () => {
                 <button onClick={() => setIsModalOpen(true)} className="btn-primary w-full mb-3">
                   Contact Agent
                 </button>
-                <button className="btn-secondary w-full">
+                <button className="btn-secondary w-full mb-3">
                   Schedule Visit
                 </button>
+                
+                {/* Share Property */}
+                <div className="mt-4">
+                  <ShareProperty property={property} />
+                </div>
               </div>
             </div>
           </div>

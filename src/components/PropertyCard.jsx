@@ -1,12 +1,41 @@
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../hooks/useFavorites';
+import { useState } from 'react';
 
 const PropertyCard = ({ property }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorite = isFavorite(property.id);
+  const [showToast, setShowToast] = useState(false);
+
+  const addToCompare = (e) => {
+    e.preventDefault();
+    const compareList = JSON.parse(localStorage.getItem('compareList') || '[]');
+    
+    if (compareList.length >= 4) {
+      alert('You can only compare up to 4 properties at a time');
+      return;
+    }
+    
+    if (compareList.find(p => p.id === property.id)) {
+      alert('Property already added to comparison');
+      return;
+    }
+    
+    compareList.push(property);
+    localStorage.setItem('compareList', JSON.stringify(compareList));
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
-    <div className="card group">
+    <div className="card group relative">
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-10 animate-fade-in">
+          Added to comparison!
+        </div>
+      )}
+      
       <div className="relative overflow-hidden h-64">
         <img
           src={property.images[0]}
@@ -94,9 +123,20 @@ const PropertyCard = ({ property }) => {
               {property.category === 'Rent' && <span className="text-sm font-normal">/month</span>}
             </p>
           </div>
-          <button className="btn-primary text-sm">
-            View Details
-          </button>
+          <div className="flex space-x-2">
+            <button
+              onClick={addToCompare}
+              className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title="Add to Compare"
+            >
+              <svg className="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </button>
+            <button className="btn-primary text-sm px-4">
+              View Details
+            </button>
+          </div>
         </div>
       </Link>
     </div>

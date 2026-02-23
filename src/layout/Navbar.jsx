@@ -12,6 +12,7 @@ const Navbar = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/properties', label: 'Properties' },
+    { path: '/compare', label: 'Compare' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
   ];
@@ -23,10 +24,10 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">EP</span>
+              <span className="text-white font-bold text-xl">PN</span>
             </div>
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
-              EstatePro
+              PrimeNext
             </span>
           </Link>
 
