@@ -12,6 +12,7 @@ const Navbar = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/properties', label: 'Properties' },
+      
     { path: '/compare', label: 'Compare' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
